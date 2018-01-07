@@ -47,14 +47,23 @@ for i in range(2,70):
     classifier.fit(X_train, Y_train)
     y_pred = classifier.predict(X_test)
     analyserObject['ConfusionMatrix'] = confusion_matrix(Y_test, y_pred)
+    confusionMatrix=analyserObject['ConfusionMatrix']
     analyserObject['Accuracy'] = accuracy_score(Y_test, y_pred)
+    analyserObject['CriminalAccuracy'] = confusionMatrix[1][1] / (confusionMatrix[1][0]+confusionMatrix[1][1])  
     # TODO : create an accuracy parameter based on 1s only and try basis that
     analyserObject["SelectedParameters"]=selectedParameters
     analyserObject["NumberOfparameters"]=fit.n_features_
     performanceMonitors.append(analyserObject)
 
-performanceMonitors=sorted(performanceMonitors, key=lambda k: k['Accuracy'],reverse=True)
+performanceMonitors=sorted(performanceMonitors, key=lambda k: k['CriminalAccuracy'],reverse=True)
 selectedParams=performanceMonitors[0]["SelectedParameters"]
-len(selectedParams)
-for i in selectedParams:
-    print(i)
+#len(selectedParams)
+print("Selected attributes")
+print(selectedParams) # [13 26 54 55]
+print("*")*30
+print("Accuracy")
+performanceMonitors[0]["Accuracy"]
+print("CriminalAccuracy")
+performanceMonitors[0]["CriminalAccuracy"]
+#for i in selectedParams:
+#    print(i)
