@@ -48,6 +48,7 @@ for i in range(2,70):
     y_pred = classifier.predict(X_test)
     analyserObject['ConfusionMatrix'] = confusion_matrix(Y_test, y_pred)
     analyserObject['Accuracy'] = accuracy_score(Y_test, y_pred)
+    # TODO : create an accuracy parameter based on 1s only and try basis that
     analyserObject["SelectedParameters"]=selectedParameters
     analyserObject["NumberOfparameters"]=fit.n_features_
     performanceMonitors.append(analyserObject)
